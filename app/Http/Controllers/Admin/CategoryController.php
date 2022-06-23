@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view ('admin.categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
 
@@ -39,8 +40,6 @@ class CategoryController extends Controller
         $val_data['slug'] = $slug;
 
         Category::create($val_data);
-
-
     }
 
 
@@ -54,7 +53,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        //dd($request->all());
+
+        $val_data = $request->validate([
+            'name' => ['required', Rule::unique('categories')->ignore($category)]
+        ]);
+        
+        $slug = Str::slug($request->name);
+        $val_data['slug'] = $slug;
+
+        $category->update($val_data);
+        return redirect()->back()->with('message', "Category $slug updated successfully");
     }
 
     /**
