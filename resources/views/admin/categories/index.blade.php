@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($cats as $category)
+                @forelse($cats as $category)
                     <tr>
                         <td scope="row">{{$category->id}}</td>
                         <td>

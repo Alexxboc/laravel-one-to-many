@@ -65,6 +65,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        return redirect()->back()->with('message', 'category $slug added successfully');
     }
 }
