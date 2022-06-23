@@ -18,6 +18,15 @@
         <small id="cover_imageHelper" class="text-muted">Type the post cover_image</small>
     </div>
     <div class="mb-4">
+      <label for="category_id" class="form-label">Category</label>
+      <select class="form-control" name="category_id" id="category_id">
+        <option value="">Select a category</option>
+        @foreach($categories as $category)
+        <option value="{{$category->id}}">{{$category->name}}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="mb-4">
         <label for="content">Content</label>
         <textarea class="form-control  @error('content') is-invalid @enderror" name="content" id="content" rows="4">
         {{old('content')}}
