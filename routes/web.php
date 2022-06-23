@@ -254,3 +254,7 @@ nella validazione 'name' => ['required' , Roule::unique('categories')->($categor
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
