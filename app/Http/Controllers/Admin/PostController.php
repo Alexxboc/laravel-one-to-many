@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -27,7 +28,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $categories = Category::all();
         //dd($categories);
         return view('admin.posts.create', compact('categories'));
@@ -74,7 +75,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
-    {   
+    {
         $categories = Category::all();
         //dd($categories);
 
@@ -93,7 +94,14 @@ class PostController extends Controller
         //dd($request->all());
 
         // Validate data
-        $val_data = $request->validated();
+        $val_data = $request->validated([
+
+            'title' => ['required', Rule::unique('posts')->ignore($post)],
+            'category_id' => 'nullable|exists:categories,id',
+            'cover_image' => 'nullable',
+            'content' => 'nullable'
+
+        ]);
 
         // Gererate slugs
         $slug = Post::generateSlug($request->title);
