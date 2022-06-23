@@ -29,9 +29,13 @@
         <label for="category_id" class="form-label">Category</label>
         <select class="form-control" name="category_id" id="category_id">
             <option value="">Select a category</option>
+            @if($post->category_id == null)
+
             @foreach($categories as $category)
             <option value="{{$category->id}}" {{$category->id == old('category_id', $post->category->id) ? 'selected' : ''}}>{{$category->name}}</option>
             @endforeach
+            
+            @endif
         </select>
     </div>
     <div class="mb-4">
