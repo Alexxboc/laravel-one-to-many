@@ -10,7 +10,7 @@
     <h1 class="my-3">All Categories</h1>
     <div class="row">
         <div class="col pe-5">
-            <form action="" method="post" class="d-flex align-items-center">
+            <form action="{{route('admin.categories.store')}}" method="post" class="d-flex align-items-center">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text" name="name" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">

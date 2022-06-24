@@ -40,6 +40,8 @@ class CategoryController extends Controller
         $val_data['slug'] = $slug;
 
         Category::create($val_data);
+
+        return redirect()->back()->with('message', "Category $slug added successfully");
     }
 
 
